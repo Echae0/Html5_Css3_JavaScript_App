@@ -85,7 +85,7 @@ function validateStudent(student) {// 필수 필드 검사
     }
     // 학번 형식 검사 (예: 영문과 숫자 조합)
     //const studentNumberPattern = /^[A-Za-z0-9]+$/;
-    const studentNumberPattern = /^s\d{5}$/;
+    const studentNumberPattern = /^S\d{5}$/;
     if (!studentNumberPattern.test(student.studentNumber)) {
         alert("학번은 영문과 숫자만 입력 가능합니다.");
         return false;
@@ -180,7 +180,8 @@ function createStudent(studentData) {
         })
         .then((result) => {
             alert("학생이 성공적으로 등록되었습니다!");
-            studentForm.reset();
+            //studentForm.reset();
+            resetForm();
             //목록 새로 고침
             loadStudents();
         })
@@ -289,14 +290,15 @@ function updateStudent(studentId, studentData) {
                     throw new Error(errorData.message || '중복 되는 정보가 있습니다.');
                 } else {
                     //기타 오류 처리
-                    throw new Error(errorData.message || '학생 등록에 실패했습니다.')
+                    throw new Error(errorData.message || '학생 수정에 실패했습니다.')
                 }
             }
             return response.json();
         })
         .then((result) => {
-            alert("학생이 성공적으로 등록되었습니다!");
-            studentForm.reset();
+            alert("학생이 성공적으로 수정되었습니다!");
+            //등록모드로 초기화
+            resetForm();
             //목록 새로 고침
             loadStudents();
         })
